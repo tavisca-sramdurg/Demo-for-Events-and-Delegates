@@ -7,13 +7,17 @@ namespace PracticingEventsAndDelegates
         static void Main(string[] args)
         {
             Worker worker = new Worker();
-            
 
-            worker.WorkPerformed += MethodList.Worker_WorkPerformed;
-            worker.WorkCompleted += MethodList.Worker_WorkCompleted;
+
+            //Delegate Inference
+            //worker.WorkPerformed = new EventHandler<WorkArgs>(MethodList.Worker_WorkPerformed);
+            //worker.WorkPerformed = MethodList.Worker_WorkPerformed;
+
+            worker.WorkPerformed += (s,e) => Console.WriteLine(e.Hours + " " + e.WorkType);
+            worker.WorkCompleted += (s,e) => Console.WriteLine("Work Done");
             worker.DoWork(5, WorkType.Coding);
 
-            Console.WriteLine("Hello World");
+            
             Console.Read();
         }
 
